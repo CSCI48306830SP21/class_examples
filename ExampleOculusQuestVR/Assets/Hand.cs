@@ -219,11 +219,20 @@ public class Hand : WorldMouse
 		{
             grabbed = g;
             handGraphics.SetActive(false);
+            StartCoroutine(doVibrate(.2f));
             Logger.log("grabbed "+this.follow.name);
             g.grab(this.follow);
             
 		}
 	}
+
+    IEnumerator doVibrate(float t,float freq = 1, float amp = 1)
+	{
+        OVRInput.SetControllerVibration(amp, freq,myHand);
+        yield return new WaitForSeconds(t);
+        OVRInput.SetControllerVibration(0, 0,myHand);
+
+    }
 
     public override bool pressDown()
     {
