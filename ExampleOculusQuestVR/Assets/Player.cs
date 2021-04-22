@@ -23,6 +23,21 @@ public class Player : MonoBehaviour
         }else{
             
         }
+
+        StartCoroutine(doLogging());
+
+
+    }
+
+    IEnumerator doLogging()
+    {
+        while (true)
+        {
+            Vector3 headPos = head.position;
+            Logger.logHeadPosition(headPos.x, headPos.y, headPos.z);
+            Logger.log("logging head position");
+            yield return new WaitForSeconds(.1f);
+        }
     }
 
     
